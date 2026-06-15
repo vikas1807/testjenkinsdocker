@@ -1,10 +1,10 @@
 pipeline {
 	agent any
-	environment {
-		mavenHome = tool 'myMaven'
-		dockerHome = tool 'myDocker'
-		PATH = "$mavenHome/bin:$dockerHome/bin:$PATH"
-	}
+	//environment {
+		//mavenHome = tool 'myMaven'
+		//dockerHome = tool 'myDocker'
+		//PATH = "$mavenHome/bin:$dockerHome/bin:$PATH"
+	//}
 	// agent {docker {image 'maven:3.8.4-openjdk-21'}}
 	stages {
 		stage('Checkout'){

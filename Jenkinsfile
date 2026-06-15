@@ -1,6 +1,11 @@
 pipeline {
-	//agent any
-	agent {docker {image 'maven:3.8.4-openjdk-21'}}
+	agent any
+	environment {
+		mavenHome = tool 'myMaven'
+		dockerHome = tool 'myDocker'
+		PATH = "$mavenHome/bin:$dockerHome/bin:$PATH"
+	}
+	// agent {docker {image 'maven:3.8.4-openjdk-21'}}
 	stages {
 		stage('Checkout'){
 			steps {
@@ -10,14 +15,15 @@ pipeline {
 				echo "PATH"
 			}
 		}
-		stage('Build') {
+		stage('compile') {
 			steps {
-				sh 'mvn --version'
-				echo "Build"
+				sh 'mvn clean compile'
+				echo "Compile"
 			}
 		}
 		stage('Test') {
 			steps {
+				sh 'mvn test'
 				echo "Test"
 			}
 		}
